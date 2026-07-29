@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_dark">
@@ -13,37 +14,38 @@
         <!-- Logo -->
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:src="@drawable/ic_mod_logo"
             android:scaleX="0"
             android:scaleY="0"
-            android:alpha="0" />
+            android:alpha="0"
+            android:contentDescription="Logo" />
 
-        <!-- Title -->
+        <!-- Brand name -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GGD MOD MENU"
+            android:text="Velaud GGD"
             android:textColor="@color/primary"
-            android:textSize="26sp"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="12dp"
-            android:fontFamily="sans-serif-condensed" />
+            android:fontFamily="sans-serif-condensed"
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Goose Goose Duck"
+            android:text="Goose Goose Duck Mod"
             android:textColor="@color/text_secondary"
-            android:textSize="13sp"
+            android:textSize="12sp"
             android:gravity="center"
             android:layout_marginBottom="32dp" />
 
-        <!-- SETUP (permissions) -->
+        <!-- SETUP: permissions needed -->
         <LinearLayout
             android:id="@+id/ll_setup"
             android:layout_width="match_parent"
@@ -56,20 +58,19 @@
                 android:layout_height="wrap_content"
                 android:text="Izinler Gerekli"
                 android:textColor="@color/text_primary"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="14dp" />
 
-            <!-- Overlay permission card -->
+            <!-- Overlay permission -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_overlay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="10dp"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/bg_card"
-                app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,16 +88,15 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Usage stats card -->
+            <!-- Usage stats -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_usage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="10dp"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/bg_card"
-                app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Accessibility card -->
+            <!-- Accessibility service -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_accessibility"
                 android:layout_width="match_parent"
@@ -122,8 +122,7 @@
                 android:layout_marginBottom="16dp"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/bg_card"
-                app:cardCornerRadius="12dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+                app:cardCornerRadius="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -134,10 +133,9 @@
                         android:layout_weight="1"
                         android:text="Erisilebilirlik Servisi"
                         android:textColor="@color/text_primary" android:textSize="14sp"/>
-                    <TextView android:id="@+id/tick_acc" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:text="&#10003;"
-                        android:textColor="@color/green" android:textSize="18sp"
-                        android:visibility="gone"/>
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="Ac >"
+                        android:textColor="@color/primary" android:textSize="12sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -154,21 +152,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tum izinler tamam!"
+                android:text="Tum izinler tamam"
                 android:textColor="@color/green"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="6dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Servisi baslatinca oyunu ac, mod ikonu otomatik cikar."
+                android:text="Servisi baslat, GGD yi ac. Mod ikonu otomatik gelir."
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp"
                 android:gravity="center"
                 android:layout_marginBottom="24dp" />
-
         </LinearLayout>
 
         <!-- Start button -->
@@ -176,44 +173,34 @@
             android:id="@+id/btn_start"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Servisi Baslat"
+            android:text="SERVISI BASLAT"
             android:textColor="@color/text_primary"
             android:backgroundTint="@color/primary"
-            android:textSize="16sp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_marginTop="8dp" />
-
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Anahtari Sifirla"
-            android:textColor="@color/text_secondary"
-            android:backgroundTint="@color/bg_card"
-            android:textSize="14sp"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="12dp" />
 
         <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- GitHub Section header -->
+        <!-- Sources section header -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="KAYNAKLAR"
             android:textColor="@color/text_secondary"
-            android:textSize="11sp"
+            android:textSize="10sp"
             android:textStyle="bold"
-            android:letterSpacing="0.12"
+            android:letterSpacing="0.14"
             android:layout_marginBottom="12dp" />
 
-        <!-- GitHub Repo Card -->
+        <!-- GitHub repo -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_github"
             android:layout_width="match_parent"
@@ -221,85 +208,55 @@
             android:layout_marginBottom="10dp"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardCornerRadius="12dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:gravity="center_vertical">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="GitHub Deposu"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="GitHub Deposu" android:textColor="@color/primary"
+                        android:textSize="14sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="github.com/aivelaud/flexclientggd"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="11sp" />
+                        android:textColor="@color/text_secondary" android:textSize="11sp" />
                 </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ac >"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Ac >" android:textColor="@color/primary"
+                    android:textSize="12sp" android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Latest Build / Download Card -->
+        <!-- Latest build -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="32dp"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/bg_card"
-            app:cardCornerRadius="12dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardCornerRadius="12dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:gravity="center_vertical">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Son Build - APK Indir"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="GitHub Actions - GooseGooseDuck Mod (~60 MB)"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="11sp" />
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Son Build - APK Indir" android:textColor="@color/primary"
+                        android:textSize="14sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="GitHub Actions - Velaud GGD"
+                        android:textColor="@color/text_secondary" android:textSize="11sp" />
                 </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Indir >"
-                    android:textColor="@color/primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Indir >" android:textColor="@color/primary"
+                    android:textSize="12sp" android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

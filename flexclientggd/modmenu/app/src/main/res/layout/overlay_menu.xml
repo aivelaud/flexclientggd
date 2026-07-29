@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Mod menu panel — NO EMOJIS, Velaud GGD branding -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/bg_menu_rounded"
     android:elevation="20dp">
 
-    <!-- ── Header ── -->
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
@@ -21,13 +21,14 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_mod_logo"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Logo" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="GGD MOD"
+            android:text="Velaud GGD"
             android:textColor="#C4866B"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -52,7 +53,7 @@
             android:contentDescription="Kapat" />
     </LinearLayout>
 
-    <!-- ── Tab Bar ── -->
+    <!-- Tab Bar — no emojis -->
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -65,21 +66,21 @@
             android:paddingStart="4dp">
 
             <Button android:id="@+id/btn_tab_movement"
-                style="@style/TabButton" android:text="🏃 Hareket" />
+                style="@style/TabButton" android:text="Hareket" />
             <Button android:id="@+id/btn_tab_role"
-                style="@style/TabButton" android:text="🎭 Rol" />
+                style="@style/TabButton" android:text="Rol" />
             <Button android:id="@+id/btn_tab_vision"
-                style="@style/TabButton" android:text="👁 Görüş" />
+                style="@style/TabButton" android:text="Gorus" />
             <Button android:id="@+id/btn_tab_kill"
-                style="@style/TabButton" android:text="🔪 Öldürme" />
+                style="@style/TabButton" android:text="Oldurme" />
             <Button android:id="@+id/btn_tab_task"
-                style="@style/TabButton" android:text="📋 Görev" />
+                style="@style/TabButton" android:text="Gorev" />
             <Button android:id="@+id/btn_tab_misc"
-                style="@style/TabButton" android:text="⚙️ Diğer" />
+                style="@style/TabButton" android:text="Diger" />
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- ── Content Panels ── -->
+    <!-- Content panels -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="380dp"
@@ -91,17 +92,12 @@
             android:orientation="vertical"
             android:paddingBottom="8dp">
 
-            <!-- ═══ MOVEMENT TAB ═══ -->
+            <!-- HAREKET -->
             <LinearLayout android:id="@+id/tab_movement"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:visibility="visible">
 
-                <include layout="@layout/row_toggle" android:id="@+id/toggle_speed"
-                    android:tag="toggle_speed" />
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="   Hız Hack — oyuncu hızını çarpar"
-                    android:textColor="#666" android:textSize="11sp"
-                    android:paddingStart="16dp" android:paddingBottom="2dp" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_speed" />
                 <include layout="@layout/row_slider" android:id="@+id/slider_speed" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp"
@@ -116,23 +112,18 @@
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_teleport" />
             </LinearLayout>
 
-            <!-- ═══ ROLE TAB ═══ -->
+            <!-- ROL -->
             <LinearLayout android:id="@+id/tab_role"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:visibility="gone">
 
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_always_imposter" />
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="   ⚠️ Sunucu tarafında çalışabilir"
-                    android:textColor="#FFC107" android:textSize="11sp"
-                    android:paddingStart="16dp" android:paddingBottom="4dp" />
-
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_always_crewmate" />
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_see_roles" />
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_show_dead" />
             </LinearLayout>
 
-            <!-- ═══ VISION TAB ═══ -->
+            <!-- GORUS -->
             <LinearLayout android:id="@+id/tab_vision"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:visibility="gone">
@@ -147,7 +138,7 @@
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_radar" />
             </LinearLayout>
 
-            <!-- ═══ KILL TAB ═══ -->
+            <!-- OLDURME -->
             <LinearLayout android:id="@+id/tab_kill"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:visibility="gone">
@@ -158,10 +149,6 @@
                 <View android:layout_width="match_parent" android:layout_height="1dp"
                     android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
 
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="  Öldürme Bekleme Süresi (sn)"
-                    android:textColor="#AAAAAA" android:textSize="12sp"
-                    android:paddingStart="16dp" android:paddingTop="8dp"/>
                 <include layout="@layout/row_slider" android:id="@+id/slider_kill_cd" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp"
@@ -171,7 +158,7 @@
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_freeze" />
             </LinearLayout>
 
-            <!-- ═══ TASK TAB ═══ -->
+            <!-- GOREV -->
             <LinearLayout android:id="@+id/tab_task"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:visibility="gone">
@@ -187,7 +174,7 @@
                 <include layout="@layout/row_toggle" android:id="@+id/toggle_see_votes" />
             </LinearLayout>
 
-            <!-- ═══ MISC TAB ═══ -->
+            <!-- DIGER -->
             <LinearLayout android:id="@+id/tab_misc"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:visibility="gone">
@@ -213,24 +200,23 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:inputType="text" />
-
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- ── Footer ── -->
+    <!-- Footer -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="28dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="#111111">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GGD Mod v1.0 • Root gerekmeyen modlar anında aktif"
-            android:textColor="#444444"
+            android:text="Velaud GGD — by aivelaud"
+            android:textColor="#3A3A3A"
             android:textSize="9sp" />
     </LinearLayout>
 

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Full-screen login overlay.
+    Backdrop (root FrameLayout) catches outside taps to dismiss.
+    Card (inner LinearLayout) consumes its own taps so they don't fall through.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_backdrop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CC000000"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:id="@+id/login_card"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_login_card"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- Close button top right -->
+        <ImageButton
+            android:id="@+id/btn_close_login"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="4dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="@drawable/bg_btn_close"
+            android:tint="#666666"
+            android:contentDescription="Kapat" />
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_mod_logo"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="Logo" />
+
+        <!-- Brand title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Velaud GGD"
+            android:textColor="#C4866B"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="GIRIS YAP"
+            android:textColor="#777777"
+            android:textSize="11sp"
+            android:letterSpacing="0.18"
+            android:layout_marginBottom="28dp" />
+
+        <!-- Key input — no hint revealing what the key is -->
+        <EditText
+            android:id="@+id/et_key"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_input_rounded"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:layout_marginBottom="6dp" />
+
+        <!-- Error label -->
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FF5555"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            android:layout_marginBottom="14dp" />
+
+        <!-- Login button -->
+        <Button
+            android:id="@+id/btn_enter"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="GIRIS"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#C4866B"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:letterSpacing="0.1"
+            style="@style/Widget.MaterialComponents.Button" />
+
+    </LinearLayout>
+</FrameLayout>
