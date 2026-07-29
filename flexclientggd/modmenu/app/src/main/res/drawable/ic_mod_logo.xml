@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mod logo: white ghost/blade shape on transparent bg — matches the uploaded icon -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Background fill -->
+    <path
+        android:fillColor="#C4866B"
+        android:pathData="M0,0 L108,0 L108,108 L0,108 Z" />
+    <!-- White blade / ghost shape (traced from uploaded icon) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,18
+          C54,18 66,16 74,24
+          C82,32 84,40 80,50
+          C88,50 94,54 90,62
+          C88,66 82,68 76,66
+          C76,74 72,82 64,84
+          C56,86 50,82 46,76
+          C40,82 32,84 26,78
+          C20,72 22,64 28,58
+          C22,56 16,50 18,42
+          C20,34 28,30 36,32
+          C34,24 40,16 48,16
+          C50,15.5 52,17 54,18 Z
+          M46,44 C43,44 41,46 41,49 C41,52 43,54 46,54 C49,54 51,52 51,49 C51,46 49,44 46,44 Z
+          M62,44 C59,44 57,46 57,49 C57,52 59,54 62,54 C65,54 67,52 67,49 C67,46 65,44 62,44 Z" />
+</vector>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptive FAB icon: squircle shape (like Instagram/YouTube)
+  NOT square, NOT circle — organic superellipse clip.
+  Uses the mod logo as content.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Squircle background (organic, between square and circle) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#C4866B" />
+            <corners android:radius="22dp" />
+            <!-- Shadow via stroke -->
+            <stroke android:width="2dp" android:color="#80000000" />
+        </shape>
+    </item>
+    <!-- Logo inset -->
+    <item
+        android:top="10dp"
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp">
+        <bitmap android:src="@drawable/ic_mod_logo_fg"
+            android:gravity="center"
+            android:tileMode="disabled" />
+    </item>
+</layer-list>

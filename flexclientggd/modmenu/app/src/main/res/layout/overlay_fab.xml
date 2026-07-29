@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="64dp"
+    android:layout_height="64dp">
+
+    <!--
+        Adaptive-icon shaped FAB.
+        We use a custom squircle/organic shape (like Instagram/YouTube)
+        via a layer-list drawable — not square, not circle.
+    -->
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_fab_adaptive"
+        android:elevation="8dp"
+        android:contentDescription="Mod Menu" />
+
+</FrameLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Foreground-only white blade shape for adaptive icon -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,14
+          C54,14 68,12 76,22
+          C84,32 84,42 78,52
+          C86,50 94,54 92,64
+          C90,70 83,72 76,68
+          C76,78 70,86 60,87
+          C52,88 46,82 44,74
+          C38,82 28,84 22,76
+          C16,68 20,58 28,54
+          C20,52 13,44 16,36
+          C19,28 28,26 36,30
+          C32,20 40,13 50,14
+          C51.5,13.7 52.8,14 54,14 Z
+          M43,46 C40,46 38,48.5 38,51.5 C38,54.5 40,57 43,57
+          C46,57 48,54.5 48,51.5 C48,48.5 46,46 43,46 Z
+          M65,46 C62,46 60,48.5 60,51.5 C60,54.5 62,57 65,57
+          C68,57 70,54.5 70,51.5 C70,48.5 68,46 65,46 Z" />
+</vector>

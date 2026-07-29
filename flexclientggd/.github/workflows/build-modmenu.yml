@@ -1,0 +1,97 @@
+name: Build Mod Menu APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'modmenu/**'
+      - '.github/workflows/build-modmenu.yml'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (e.g. v1.0.0)'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android build tools
+        run: |
+          sdkmanager --install "build-tools;34.0.0" "platforms;android-34" 2>&1 | tail -5
+
+      - name: Grant execute permission for gradlew
+        run: |
+          cd modmenu
+          # Generate gradlew if not present
+          if [ ! -f gradlew ]; then
+            gradle wrapper --gradle-version=8.2
+          fi
+          chmod +x gradlew
+
+      - name: Build Debug APK
+        run: |
+          cd modmenu
+          ./gradlew assembleDebug --no-daemon
+          echo "✅ Build complete"
+          find . -name "*.apk" | head -5
+
+      - name: Rename APK
+        run: |
+          APK=$(find modmenu -name "*debug*.apk" | head -1)
+          mkdir -p dist
+          cp "$APK" dist/GGDModMenu_v${{ github.run_number }}.apk
+          echo "APK_PATH=dist/GGDModMenu_v${{ github.run_number }}.apk" >> $GITHUB_ENV
+          ls -lh dist/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GGDModMenu-v${{ github.run_number }}
+          path: ${{ env.APK_PATH }}
+          retention-days: 30
+
+      - name: Create GitHub Release
+        if: ${{ github.event.inputs.release_tag != '' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: modmenu-${{ github.event.inputs.release_tag }}
+          name: "GGD Mod Menü ${{ github.event.inputs.release_tag }}"
+          body: |
+            ## GGD Mod Menü ${{ github.event.inputs.release_tag }}
+
+            ### Özellikler
+            - 🔐 Anahtar korumalı giriş
+            - 🏃 Hız Hack (1x–10x)
+            - 🎭 Rol seçimi (Her zaman Katil/Mürettebat)
+            - 👁️ Görüş genişletme + Duvardan görüş
+            - 🔪 Öldürme ayarları (cooldown, sessiz kill)
+            - 📋 Otomatik görev tamamlama
+            - ⚙️ Anti-kick, İsim değiştirme, Tüm kıyafetler
+
+            ### Kurulum
+            1. APK'yı indir
+            2. "Bilinmeyen kaynaklardan yükle" izni ver
+            3. Yükle → İzinleri onayla
+            4. Anahtar ile gir → Servisi başlat → GGD'yi aç
+
+            Build #${{ github.run_number }}
+          files: ${{ env.APK_PATH }}
+          draft: false
+          prerelease: false

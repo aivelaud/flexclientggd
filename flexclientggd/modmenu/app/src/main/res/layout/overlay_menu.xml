@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_menu_rounded"
+    android:elevation="20dp">
+
+    <!-- ── Header ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="10dp"
+        android:background="@drawable/bg_menu_header">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_mod_logo"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="GGD MOD"
+            android:textColor="#C4866B"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed" />
+
+        <TextView
+            android:id="@+id/tv_mod_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MOD KAPALI"
+            android:textColor="#666666"
+            android:textSize="10sp"
+            android:layout_marginEnd="8dp" />
+
+        <ImageButton
+            android:id="@+id/btn_close_menu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="@drawable/bg_btn_close"
+            android:tint="#AAAAAA"
+            android:contentDescription="Kapat" />
+    </LinearLayout>
+
+    <!-- ── Tab Bar ── -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:scrollbars="none"
+        android:background="#1A1A1A">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="4dp">
+
+            <Button android:id="@+id/btn_tab_movement"
+                style="@style/TabButton" android:text="🏃 Hareket" />
+            <Button android:id="@+id/btn_tab_role"
+                style="@style/TabButton" android:text="🎭 Rol" />
+            <Button android:id="@+id/btn_tab_vision"
+                style="@style/TabButton" android:text="👁 Görüş" />
+            <Button android:id="@+id/btn_tab_kill"
+                style="@style/TabButton" android:text="🔪 Öldürme" />
+            <Button android:id="@+id/btn_tab_task"
+                style="@style/TabButton" android:text="📋 Görev" />
+            <Button android:id="@+id/btn_tab_misc"
+                style="@style/TabButton" android:text="⚙️ Diğer" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- ── Content Panels ── -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
+
+            <!-- ═══ MOVEMENT TAB ═══ -->
+            <LinearLayout android:id="@+id/tab_movement"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:visibility="visible">
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_speed"
+                    android:tag="toggle_speed" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="   Hız Hack — oyuncu hızını çarpar"
+                    android:textColor="#666" android:textSize="11sp"
+                    android:paddingStart="16dp" android:paddingBottom="2dp" />
+                <include layout="@layout/row_slider" android:id="@+id/slider_speed" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_ghost_speed" />
+                <include layout="@layout/row_slider" android:id="@+id/slider_ghost_speed" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_teleport" />
+            </LinearLayout>
+
+            <!-- ═══ ROLE TAB ═══ -->
+            <LinearLayout android:id="@+id/tab_role"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:visibility="gone">
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_always_imposter" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="   ⚠️ Sunucu tarafında çalışabilir"
+                    android:textColor="#FFC107" android:textSize="11sp"
+                    android:paddingStart="16dp" android:paddingBottom="4dp" />
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_always_crewmate" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_see_roles" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_show_dead" />
+            </LinearLayout>
+
+            <!-- ═══ VISION TAB ═══ -->
+            <LinearLayout android:id="@+id/tab_vision"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:visibility="gone">
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_vision" />
+                <include layout="@layout/row_slider" android:id="@+id/slider_vision" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_wallhack" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_radar" />
+            </LinearLayout>
+
+            <!-- ═══ KILL TAB ═══ -->
+            <LinearLayout android:id="@+id/tab_kill"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:visibility="gone">
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_no_kill_cd" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_instant_kill" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="  Öldürme Bekleme Süresi (sn)"
+                    android:textColor="#AAAAAA" android:textSize="12sp"
+                    android:paddingStart="16dp" android:paddingTop="8dp"/>
+                <include layout="@layout/row_slider" android:id="@+id/slider_kill_cd" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_silent_kill" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_freeze" />
+            </LinearLayout>
+
+            <!-- ═══ TASK TAB ═══ -->
+            <LinearLayout android:id="@+id/tab_task"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:visibility="gone">
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_auto_task" />
+                <include layout="@layout/row_slider" android:id="@+id/slider_task_speed" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_inf_emergency" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_emergency_spam" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_see_votes" />
+            </LinearLayout>
+
+            <!-- ═══ MISC TAB ═══ -->
+            <LinearLayout android:id="@+id/tab_misc"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:visibility="gone">
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_anti_kick" />
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_unlock_all" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="#2A2A2A" android:layout_marginVertical="4dp"/>
+
+                <include layout="@layout/row_toggle" android:id="@+id/toggle_name_spoof" />
+                <EditText
+                    android:id="@+id/et_name_spoof"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_input_rounded"
+                    android:hint="Yeni isim..."
+                    android:textColorHint="#555"
+                    android:textColor="#FFF"
+                    android:textSize="13sp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- ── Footer ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#111111">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GGD Mod v1.0 • Root gerekmeyen modlar anında aktif"
+            android:textColor="#444444"
+            android:textSize="9sp" />
+    </LinearLayout>
+
+</LinearLayout>

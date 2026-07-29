@@ -1,0 +1,168 @@
+name: Build APKs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (e.g. v4.09.00-mod)'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # ── Download apktool (bundles smali/baksmali internally) ─────────
+      - name: Download apktool
+        run: |
+          wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar -O /usr/local/bin/apktool.jar
+          wget -q https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool  -O /usr/local/bin/apktool
+          chmod +x /usr/local/bin/apktool
+          echo "apktool version: $(java -jar /usr/local/bin/apktool.jar --version)"
+
+      - name: Install zipalign & apksigner
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq zipalign apksigner
+          echo "zipalign ready"
+
+      # ── Verify source APK ─────────────────────────────────────────────
+      - name: Verify source APK
+        run: |
+          ls -lh original/GooseGooseDuck_4.09.00.apk
+          unzip -t original/GooseGooseDuck_4.09.00.apk > /dev/null && echo "APK zip OK"
+
+      # ── Step 1: Decode APK → smali (apktool bundles baksmali) ────────
+      - name: Decode APK to smali with apktool
+        run: |
+          java -jar /usr/local/bin/apktool.jar d original/GooseGooseDuck_4.09.00.apk \
+            -o ggd_decoded/ -f
+          echo "Decoded directories:"
+          ls ggd_decoded/ | head -20
+
+      # ── Step 2: Create symlinks for patch script compatibility ────────
+      # apktool names main dir "smali/"; patch script expects "smali_classes/"
+      - name: Create smali dir aliases for patch script
+        run: |
+          [ -d "ggd_decoded/smali" ] && ln -s "$(pwd)/ggd_decoded/smali" smali_classes
+          for d in ggd_decoded/smali_classes*/; do
+            [ -d "$d" ] || continue
+            name="$(basename "$d")"
+            ln -s "$(pwd)/$d" "$name"
+          done
+          echo "Smali dirs aliased:"
+          ls -la | grep smali
+
+      # ── Step 3: Apply billing removal patch ───────────────────────────
+      - name: Apply billing removal patch
+        run: |
+          bash patches/remove_billing_smali.sh
+
+      # ── Step 4: Rebuild APK with apktool (bundles smali) ─────────────
+      - name: Build modified GGD APK with apktool
+        run: |
+          mkdir -p dist
+          java -jar /usr/local/bin/apktool.jar b ggd_decoded/ \
+            -o dist/GGD_unsigned.apk -f
+          ls -lh dist/GGD_unsigned.apk
+          echo "Modified APK assembled"
+
+      - name: Zipalign
+        run: |
+          zipalign -v -p 4 dist/GGD_unsigned.apk dist/GGD_aligned.apk
+
+      - name: Generate signing keystore
+        run: |
+          keytool -genkeypair -v \
+            -keystore release.jks \
+            -keyalg RSA -keysize 2048 \
+            -validity 10000 \
+            -storepass android \
+            -keypass android \
+            -alias release \
+            -dname "CN=GGDMod,O=Mod,C=TR"
+
+      - name: Sign GGD APK
+        run: |
+          apksigner sign \
+            --ks release.jks \
+            --ks-pass pass:android \
+            --key-pass pass:android \
+            --ks-key-alias release \
+            --out dist/GooseGooseDuck_Mod_v${{ github.run_number }}.apk \
+            dist/GGD_aligned.apk
+          echo "APK_GGD=dist/GooseGooseDuck_Mod_v${{ github.run_number }}.apk" >> $GITHUB_ENV
+          ls -lh dist/
+
+      # ── Build Mod Menu APK (~5 MB companion app) ─────────────────────
+      - name: Build Mod Menu APK
+        run: |
+          cd modmenu
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon -q
+          echo "Mod Menu build complete"
+          find . -name "*.apk" | head -5
+
+      - name: Rename Mod Menu APK
+        run: |
+          APK=$(find modmenu -name "*debug*.apk" | head -1)
+          cp "$APK" dist/GGDModMenu_v${{ github.run_number }}.apk
+          echo "APK_MENU=dist/GGDModMenu_v${{ github.run_number }}.apk" >> $GITHUB_ENV
+          ls -lh dist/
+
+      # ── Upload both APKs ─────────────────────────────────────────────
+      - name: Upload GGD Modified APK (~60 MB)
+        uses: actions/upload-artifact@v4
+        with:
+          name: GooseGooseDuck-Mod-v${{ github.run_number }}
+          path: ${{ env.APK_GGD }}
+          retention-days: 30
+
+      - name: Upload Mod Menu APK (~5 MB)
+        uses: actions/upload-artifact@v4
+        with:
+          name: GGDModMenu-v${{ github.run_number }}
+          path: ${{ env.APK_MENU }}
+          retention-days: 30
+
+      - name: Create GitHub Release (manual trigger only)
+        if: ${{ github.event.inputs.release_tag != '' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.release_tag }}
+          name: "GGD Mod ${{ github.event.inputs.release_tag }}"
+          body: |
+            ## GGD Mod ${{ github.event.inputs.release_tag }}
+
+            ### 2 APK dosyasi mevcut:
+            - **GooseGooseDuck_Mod** (~60 MB) — Billing kaldirılmis GGD
+            - **GGDModMenu** (~5 MB) — Floating mod menu companion
+
+            ### Kurulum
+            1. Her iki APK'yi da indir
+            2. GGDModMenu'yu yukle ve izinleri ver
+            3. GooseGooseDuck_Mod'u yukle
+            4. Mod menuyu ac - Anahtari gir - Servisi baslat - GGD'yi ac
+
+            Build #${{ github.run_number }}
+          files: |
+            ${{ env.APK_GGD }}
+            ${{ env.APK_MENU }}
+          draft: false
+          prerelease: false

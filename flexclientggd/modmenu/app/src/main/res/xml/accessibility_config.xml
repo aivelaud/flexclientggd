@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault"
+    android:canRetrieveWindowContent="false"
+    android:description="@string/accessibility_service_desc"
+    android:notificationTimeout="100" />
+    <!--
+         packageNames özelliği KASITLI OLARAK kaldırıldı.
+         packageNames="com.gaggle.fun" olduğunda erişilebilirlik servisi yalnızca
+         GGD penceresi için event alıyordu. Bu yüzden:
+           – GGD zaten açıkken servis başlarsa hiç event gelmiyordu (overlay hiç çıkmıyordu).
+           – Kullanıcı GGD'den çıkınca arka plan eventi gelmiyordu (overlay kapanmıyordu).
+         Şimdi tüm pencere değişikliklerini dinleyip paket adını kodda filtreliyoruz.
+    -->

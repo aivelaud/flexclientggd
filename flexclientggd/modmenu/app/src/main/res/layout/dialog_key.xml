@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog_rounded"
+    android:padding="28dp">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_mod_logo"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GGD MOD MENÜ"
+        android:textColor="#C4866B"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:fontFamily="sans-serif-condensed" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Erişim anahtarını gir"
+        android:textColor="#AAAAAA"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/et_key"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_input_rounded"
+        android:hint="Admin-••••••••••••••••••••••"
+        android:textColorHint="#666666"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:inputType="textPassword"
+        android:imeOptions="actionDone"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="GİRİŞ"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#C4866B"
+        android:textStyle="bold"
+        style="@style/Widget.MaterialComponents.Button" />
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptive icon — squircle/organic shape (not square, not circle).
+  The system applies its own mask. On Android 8+ with squircle launchers
+  (Pixel, Samsung One UI) this renders as an organic squircle — like Instagram.
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_bg" />
+    <foreground android:drawable="@drawable/ic_mod_logo_fg" />
+</adaptive-icon>

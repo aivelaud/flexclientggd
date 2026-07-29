@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GGD Mod</string>
+    <string name="accessibility_service_label">GGD Mod Detector</string>
+    <string name="accessibility_service_desc">Goose Goose Duck açık olduğunda mod menüyü otomatik göstermek için kullanılır.</string>
+    <string name="key_hint">Erişim Anahtarı</string>
+    <string name="key_enter">Anahtarı Gir</string>
+    <string name="key_wrong">Yanlış anahtar</string>
+    <string name="key_ok">Giriş başarılı</string>
+    <string name="github_repo">GitHub Deposu</string>
+    <string name="github_actions">Son Build (İndir)</string>
+</resources>
