@@ -1,0 +1,86 @@
+name: Build Mod Menu APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'flexclientggd/modmenu/**'
+      - '.github/workflows/build-modmenu.yml'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (e.g. v1.0.0)'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android build tools
+        run: |
+          sdkmanager --install "build-tools;34.0.0" "platforms;android-34" 2>&1 | tail -5
+
+      - name: Grant execute permission for gradlew
+        run: |
+          cd flexclientggd/modmenu
+          chmod +x gradlew
+
+      - name: Build Debug APK
+        run: |
+          cd flexclientggd/modmenu
+          ./gradlew assembleDebug --no-daemon
+          echo "Build complete"
+          find . -name "*.apk" | head -5
+
+      - name: Rename APK
+        run: |
+          APK=$(find flexclientggd/modmenu -name "*debug*.apk" | head -1)
+          mkdir -p dist
+          cp "$APK" dist/VelaudGGD_v${{ github.run_number }}.apk
+          echo "APK_PATH=dist/VelaudGGD_v${{ github.run_number }}.apk" >> $GITHUB_ENV
+          ls -lh dist/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VelaudGGD-v${{ github.run_number }}
+          path: ${{ env.APK_PATH }}
+          retention-days: 30
+
+      - name: Create GitHub Release
+        if: ${{ github.event.inputs.release_tag != '' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.event.inputs.release_tag }}
+          name: "Velaud GGD ${{ github.event.inputs.release_tag }}"
+          body: |
+            ## Velaud GGD ${{ github.event.inputs.release_tag }}
+
+            GGD uzerinde calisan overlay mod menusu.
+
+            ### Kurulum
+            1. APK indir
+            2. Bilinmeyen kaynaklardan yukle izni ver
+            3. Yukle, izinleri onayla
+            4. Servisi baslat, GGD yi ac
+
+            Build #${{ github.run_number }}
+          files: ${{ env.APK_PATH }}
+          draft: false
+          prerelease: false
